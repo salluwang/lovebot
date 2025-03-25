@@ -4,6 +4,12 @@ import requests
 SENDKEY = os.getenv("SENDKEY")
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
+if not SENDKEY:
+    raise ValueError("❌ SENDKEY 未设置，请检查 GitHub Secrets 配置！")
+if not WEATHER_API_KEY:
+    raise ValueError("❌ WEATHER_API_KEY 未设置，请检查 GitHub Secrets 配置！")
+
+
 def get_weather(city="kaifeng", lang="en"):
     url = f"https://api.weatherapi.com/v1/current.json?key={WEATHER_API_KEY}&q={city}&lang={lang}"
     response = requests.get(url)
