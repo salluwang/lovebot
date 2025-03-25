@@ -25,3 +25,5 @@ jobs:
       - name: Run weather push
         run: |
           python weather_push.py
+        env:
+          SENDKEY: ${{ secrets.SENDKEY }}
