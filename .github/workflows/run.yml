@@ -1,0 +1,27 @@
+name: Daily Weather Push
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 每天 UTC 23:00，北京时间 早上7点
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run weather push
+        run: |
+          python weather_push.py
